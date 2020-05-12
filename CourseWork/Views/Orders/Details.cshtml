@@ -1,10 +1,99 @@
-﻿@model CourseWork.Models.Order
+﻿@model IEnumerable<CourseWork.Models.OrderProduct>
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<!DOCTYPE html>
 
-    <h4>Order</h4>
-  
+<html>
+<head>
+    <title>Warehouse</title>
+</head>
+<body>
+
+    <div style="padding: 25px 25px 25px 25px;">
+        <form class="simple" method="get" action="~/OrderProducts/Create">
+            <p><input type="hidden" name="orderId" style="background:unset;" value="@ViewBag.Order.OrderId" /></p>
+            <p><input class="btn btn-warning" style="margin:auto" type="submit" value="Add new" /></p>
+        </form>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Phone number</th>
+                <th>Old all sum</th>
+                <th>New all sum</th>
+                <th>All write of sum</th>
+                <th>Old disbalance</th>
+                <th>New disbalance</th>
+            </tr>
+            <tr>
+                <td>@ViewBag.Order.Customer</td>
+                <td>@ViewBag.Order.Date.ToShortDateString()</td>
+                <td>@ViewBag.Order.PhoneNumber</td>
+                <td>@ViewBag.Order.OldAllSum</td>
+                <td>@ViewBag.Order.NewAllSum</td>
+                <td>@ViewBag.Order.AllWriteOffSum</td>
+                <td>@ViewBag.Order.OldDisbalance</td>
+                <td>@ViewBag.Order.NewDisbalance</td>
+            </tr>
+        </table>
+    </div>
+    <div style="padding-top:20px;">
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Old price</th>
+                <th>New price</th>
+                <th>Old sum</th>
+                <th>New sum</th>
+                <th>Amount</th>
+                <th>Write-Off Sum</th>
+                
+            </tr>
+            @foreach (var product in Model)
+            {
+        <tr>
+            <td>@product.Product.Name</td>
+            <td>@product.Product.Description</td>
+            <td>@product.OldPrice</td>
+            <td>@product.NewPrice</td>
+            <td>@product.OldSum</td>
+            <td>@product.NewSum</td>
+            <td>@product.Amount</td>
+            <td>@product.WriteOffSum</td>
+            <td>
+                <div style="padding-right:15px;padding-bottom: 20px;">
+                    <form method="get" action="~/OrderProducts/Delete">
+                        <input type="hidden" name="orderId" style="height:5px;" value="@ViewBag.Order.OrderId" />
+                        <input type="hidden" name="productId" value="@product.Product.ProductId" /><br>
+                        <input class="btn btn-warning" style="padding-right:15px" type="submit" value="Delete" />
+                    </form>
+                </div>
+            </td>
+            @*<td>
+            <div style="padding:25px 25px 25px 25px;">
+                <form method="get" action="~/Order/Details">
+                    <input type="hidden" name="orderId" value="@order.OrderId" />
+                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Details" />
+                </form>
+            </div>
+        </td>
+        <td>
+            <div style="padding:25px 25px 25px 25px;">
+                <form method="delete">
+                    <input type="hidden" name="orderId" value="@order.OrderId" />
+                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Delete" />
+                </form>
+            </div>
+        </td>*@
+        </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

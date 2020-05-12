@@ -21,7 +21,8 @@ namespace CourseWork
                         OldAllSum = 0,
                         NewAllSum = 0,
                         AllWriteOffSum = 0,
-                        Disbalance = 0
+                        OldDisbalance = 0,
+                        NewDisbalance = 0
                     }
                     );
                 context.SaveChanges();

@@ -35,13 +35,16 @@ namespace CourseWork.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Disbalance")
-                        .HasColumnType("int");
-
                     b.Property<int>("NewAllSum")
                         .HasColumnType("int");
 
+                    b.Property<int>("NewDisbalance")
+                        .HasColumnType("int");
+
                     b.Property<int>("OldAllSum")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OldDisbalance")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")

@@ -14,7 +14,8 @@ namespace CourseWork.Models
         public int OldAllSum { get; set; }
         public int NewAllSum { get; set; }
         public int AllWriteOffSum { get; set; }
-        public int Disbalance { get; set; }
+        public int OldDisbalance { get; set; }
+        public int NewDisbalance { get; set; }
         public virtual ICollection<OrderProduct> OrdersProducts { get; set; }
     }
 }

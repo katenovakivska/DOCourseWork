@@ -42,32 +42,32 @@ namespace CourseWork.Controllers
             order.Date = DateTime.Now;
             order.OldAllSum = 0;
             order.NewAllSum = 0;
-            order.Disbalance = 0;
+            order.NewDisbalance = 0;
             order.AllWriteOffSum = 0;
             _context.Orders.Add(order);
             _context.SaveChanges();
             return RedirectToAction("Create", "OrderProducts", new { orderId = order.OrderId });
         }
 
-        // GET: Orders/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        public IActionResult Details(int orderId)
         {
-            if (id == null)
+            if (orderId == 0)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders
-                .FirstOrDefaultAsync(m => m.OrderId == id);
-            if (order == null)
+            var order = _context.Orders.FirstOrDefault(x => x.OrderId == orderId);
+            var orderProducts = _context.OrderProducts.Where(x => x.OrderId == orderId);
+            foreach (var op in orderProducts)
             {
-                return NotFound();
+                op.Product = _context.Products.FirstOrDefault(x => x.ProductId == op.ProductId);
+            
             }
+            ViewBag.Order = order;
 
-            return View(order);
+            return View(orderProducts);
         }
-
-        // GET: Orders/Create
         
 
       

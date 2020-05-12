@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseWork.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20200511220817_CreateTables")]
+    [Migration("20200512122121_CreateTables")]
     partial class CreateTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,13 +37,16 @@ namespace CourseWork.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Disbalance")
-                        .HasColumnType("int");
-
                     b.Property<int>("NewAllSum")
                         .HasColumnType("int");
 
+                    b.Property<int>("NewDisbalance")
+                        .HasColumnType("int");
+
                     b.Property<int>("OldAllSum")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OldDisbalance")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")

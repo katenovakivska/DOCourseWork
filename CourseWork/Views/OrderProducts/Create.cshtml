@@ -3,36 +3,55 @@
 @{
     ViewData["Title"] = "Create";
 }
+    <div style="padding:25px 25px 25px 25px;">
+        <form class="simple" method="get" action="~/Orders/Details">
+                <input type="hidden" value="@ViewBag.Id" name="orderId" />
+                <input class="btn btn-warning" style="margin:auto" type="submit" value="Back">
+        </form>
+    </div>
+<div style="padding-top:20px;">
 
-    <div style="padding-top:100px;">
-        <form method="post">
-            <h3>Add product to order</h3>
-            <input type="hidden" value="@ViewBag.Id" name="orderProduct.OrderId" />
-           <p> <div class="form-group">
+    <form method="post">
+        <h3>Add product to order</h3>
+        <input type="hidden" value="@ViewBag.Id" name="orderProduct.OrderId" />
+        <p>
+            <div class="form-group">
                 <label for="exampleFormControlSelect2" style="padding-left:100px;">Choose product</label>
                 <select multiple class="form-control" style="width: 50%; margin:auto;" id="exampleFormControlSelect2" name="orderProduct.ProductId">
                     @foreach (var product in Model)
                     {
-                    
+
                         <option label="@product.Name" name="orderProduct.ProductId">@product.ProductId</option>
                     }
                 </select>
             </div>
-            </p>
-           <p>
-               <label style="padding-left: 100px;">Amount</label><br />
-               <input class="form-control" type="number" name="orderProduct.Amount" required />
-           </p>
+        </p>
+        <p>
+            <label style="padding-left: 100px;">Amount</label><br />
+            <input class="form-control" type="number" name="orderProduct.Amount" required />
+        </p>
+        <p>
+            <label style="padding-left: 100px;">Write-off sum</label><br />
+            <input class="form-control" type="number" name="orderProduct.WriteOffSum" required />
+        </p>
+        <p>
+            <div style="padding-bottom:15px; padding-left:170px;">
+                <input class="btn btn-warning" style="margin:auto" type="submit" value="Add">
+            </div>
+        </p>
+
+    </form>
+    @*<div style="padding-top: 0">
+        <form method="get"  action="~/Orders/Details">
             <p>
-                <label style="padding-left: 100px;">Write-off sum</label><br />
-                <input class="form-control" type="number" name="orderProduct.WriteOffSum" required />
-            </p>
+            <input type="hidden" value="@ViewBag.Id" name="orderId" />
+                </p>
             <p>
                 <div style="padding-bottom:15px; padding-left:170px;">
-                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Add">
+                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Back">
                 </div>
             </p>
-
         </form>
-    </div>
+            </div>*@
+</div>
 

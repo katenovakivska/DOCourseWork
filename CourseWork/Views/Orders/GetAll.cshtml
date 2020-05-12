@@ -35,13 +35,15 @@
         <td>@order.OldAllSum</td>
         <td>@order.NewAllSum</td>
         <td>@order.AllWriteOffSum</td>
-        <td>@order.Disbalance</td>
+        <td>@order.OldDisbalance</td>
+        <td>@order.NewDisbalance</td>
+
         <td>
             <div style="padding:25px 25px 25px 25px;">
-                <form method="get" action="~/OrderProducts/Create">
-                    <input type="hidden" name="orderId" value="@order.OrderId"/>
-                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Add" />
-                    </form>
+                <form method="get" action="~/Orders/Details">
+                    <input type="hidden" name="orderId" value="@order.OrderId" />
+                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Details" />
+                </form>
             </div>
         </td>
         <td>
@@ -50,7 +52,7 @@
                     <input type="hidden" name="orderId" value="@order.OrderId" />
                     <input class="btn btn-warning" style="margin:auto" type="submit" value="Delete" />
                 </form>
-                    </div>
+            </div>
         </td>
     </tr>
         }

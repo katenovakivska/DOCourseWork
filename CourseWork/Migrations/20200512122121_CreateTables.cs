@@ -19,7 +19,8 @@ namespace CourseWork.Migrations
                     OldAllSum = table.Column<int>(nullable: false),
                     NewAllSum = table.Column<int>(nullable: false),
                     AllWriteOffSum = table.Column<int>(nullable: false),
-                    Disbalance = table.Column<int>(nullable: false)
+                    OldDisbalance = table.Column<int>(nullable: false),
+                    NewDisbalance = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

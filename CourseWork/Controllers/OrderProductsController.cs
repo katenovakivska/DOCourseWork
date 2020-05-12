@@ -45,9 +45,25 @@ namespace CourseWork.Controllers
             orderProduct.Order = _context.Orders.FirstOrDefault(o => o.OrderId == orderProduct.OrderId);
             orderProduct.Product = _context.Products.FirstOrDefault(p => p.ProductId == orderProduct.ProductId);
             _context.OrderProducts.Add(orderProduct);
+            var order = _context.Orders.FirstOrDefault(x => x.OrderId == orderProduct.OrderId);
+            order.AllWriteOffSum = order.AllWriteOffSum + orderProduct.WriteOffSum;
+            order.OldAllSum = order.OldAllSum + (orderProduct.Amount * orderProduct.OldPrice);
+            order.OldDisbalance = Math.Abs(order.AllWriteOffSum - order.OldAllSum);
+            _context.Orders.Update(order);
             _context.SaveChanges();
 
             return RedirectToAction("Create", "OrderProducts", new { orderId = orderProduct.OrderId });
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int orderId, int productId)
+        {
+            var orderProduct = _context.OrderProducts.FirstOrDefault(x => x.OrderId == orderId && x.ProductId == productId);
+            int id = orderId;
+            _context.OrderProducts.Remove(orderProduct);
+            _context.SaveChanges();
+
+            return RedirectToAction("Details", "Orders", new { orderId = id });
         }
         // GET: OrderProducts
         public async Task<IActionResult> Index()
@@ -139,36 +155,7 @@ namespace CourseWork.Controllers
             return View(orderProduct);
         }
 
-        // GET: OrderProducts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var orderProduct = await _context.OrderProducts
-                .Include(o => o.Order)
-                .Include(o => o.Product)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
-            if (orderProduct == null)
-            {
-                return NotFound();
-            }
-
-            return View(orderProduct);
-        }
-
-        // POST: OrderProducts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var orderProduct = await _context.OrderProducts.FindAsync(id);
-            _context.OrderProducts.Remove(orderProduct);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+       
 
         private bool OrderProductExists(int id)
         {
