@@ -12,19 +12,38 @@ namespace CourseWork.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly OrderContext _context;
+        OrderContext _context;
 
         public ProductsController(OrderContext context)
         {
             _context = context;
         }
 
-        // GET: Products
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            return View(await _context.Products.ToListAsync());
+            var products = _context.Products.ToList();
+            return View(products);
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Product product)
+        {
+            if (product.Name == null || product.Description == null)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+            _context.Products.Add(product);
+            _context.SaveChanges();
+
+            return View(product);
+        }
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,27 +62,11 @@ namespace CourseWork.Controllers
             return View(product);
         }
 
-        // GET: Products/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,Description")] Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(product);
-        }
+        
+        
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)

@@ -1,32 +1,4 @@
-﻿@model IEnumerable<CourseWork.Models.Product>
+﻿
 @{
-    //ViewData["Title"] = "Список смартфонов";
     Layout = "_Layout";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Warehouse</title>
-</head>
-<body>
-    <h3>All products</h3>
-    <table>
-        <tr>
-            <td>Product name</td>
-            <td>Description</td>
-            <td></td>
-        </tr>
-        @foreach (var product in Model)
-        {
-            <tr>
-                <td>@product.Name</td>
-                <td>@product.Description</td>
-                @*<td><a href="~/Home/Buy/@phone.Id">Купить</a></td>*@
-            </tr>
-        }
-    </table>
-   
-</body>
-</html>

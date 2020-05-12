@@ -11,14 +11,12 @@ namespace CourseWork.Controllers
 {
     public class HomeController : Controller
     {
-        ////OrderContext db;
-        public HomeController(/*OrderContext context*/)
+        public HomeController()
         {
-            //db = context;
         }
         public IActionResult Index()
         {
-            return View(/*db.Products.ToList()*/);
+            return View();
         }
     }
 }

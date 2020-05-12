@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         body {
             /*background-image: url(https://i.pinimg.com/236x/5f/6b/90/5f6b901b907a2dc694bbe87effdbcdf3.jpg);*/
@@ -11,6 +12,51 @@
             background-size: cover;
         }
 
+        table {
+            background-color: #333334;
+            font-size: 18px;
+            text-align: center;
+            opacity: 0.8;
+            width: 100%;
+            font-family: 'PT Sans Caption', sans-serif;
+            color: #EEF4D5;
+        }
+
+        tr {
+            height: 40px;
+        }
+
+        form {
+            margin:auto;
+            align-content: center;
+            background-color: #333334;
+            opacity: 0.8;
+            width: 30%;
+            border-radius: 15px;
+        }
+
+        h3 {
+            padding-top: 15px;
+            text-align: center;
+            font-family: 'PT Sans Caption', sans-serif;
+            color: #EEF4D5;
+        }
+
+        label {
+            font-size: 18px;
+            margin: auto;
+            align-content:center;
+            font-family: 'PT Sans Caption', sans-serif;
+            color: #EEF4D5;
+        }
+        input[type=text], select {
+            margin: auto;
+            width: 50%;
+        }
+        input[type=number], select {
+            margin: auto;
+            width: 50%;
+        }
         .menu-main {
             margin: auto;
             margin-top: 0;
@@ -28,16 +74,16 @@
                 display: inline-block;
             }
 
-        .menu-main a {
-            text-decoration: none;
-            display: inline-block;
-            margin: 0 15px;
-            padding: 10px 30px;
-            font-family: 'PT Sans Caption', sans-serif;
-            color: #EEF4D5;
-            transition: .3s linear;
-            position: relative;
-        }
+            .menu-main a {
+                text-decoration: none;
+                display: inline-block;
+                margin: 0 15px;
+                padding: 10px 30px;
+                font-family: 'PT Sans Caption', sans-serif;
+                color: #EEF4D5;
+                transition: .3s linear;
+                position: relative;
+            }
 
                 .menu-main a:before,
                 .menu-main a:after {
@@ -75,8 +121,8 @@
 </head>
 <body>
         <ul class="menu-main">
-            <li>@Html.ActionLink("Catalog", "", "")</li>
-            <li>@Html.ActionLink("Orders", "", "")</li>
+            <li>@Html.ActionLink("Catalog", "GetAll", "Products")</li>
+            <li>@Html.ActionLink("Orders", "GetAll", "Orders")</li>
         </ul>
         @RenderBody()
     <br>
