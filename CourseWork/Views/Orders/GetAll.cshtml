@@ -1,0 +1,60 @@
+﻿
+
+@model IEnumerable<CourseWork.Models.Order>
+@{
+    //ViewData["Title"] = "Список смартфонов";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Warehouse</title>
+</head>
+<body>
+
+    <div style="padding:25px 25px 25px 25px;">
+        <a class="btn btn-warning" role="button" href="~/Orders/Create">Add new</a>
+    </div>
+    <table>
+        <tr>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Phone number</th>
+            <th>Old all sum</th>
+            <th>New all sum</th>
+            <th>All write of sum</th>
+            <th>Disbalance</th>
+        </tr>
+        @foreach (var order in Model)
+        {
+    <tr>
+        <td>@order.Customer</td>
+        <td>@order.Date.ToShortDateString()</td>
+        <td>@order.PhoneNumber</td>
+        <td>@order.OldAllSum</td>
+        <td>@order.NewAllSum</td>
+        <td>@order.AllWriteOffSum</td>
+        <td>@order.Disbalance</td>
+        <td>
+            <div style="padding:25px 25px 25px 25px;">
+                <form method="get" action="~/OrderProducts/Create">
+                    <input type="hidden" name="orderId" value="@order.OrderId"/>
+                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Add" />
+                    </form>
+            </div>
+        </td>
+        <td>
+            <div style="padding:25px 25px 25px 25px;">
+                <form method="delete">
+                    <input type="hidden" name="orderId" value="@order.OrderId" />
+                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Delete" />
+                </form>
+                    </div>
+        </td>
+    </tr>
+        }
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿@model CourseWork.Models.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div style="padding-top:100px;">
+    <form method="post">
+        <h3>Add order</h3>
+        <p>
+            <label style="padding-left: 100px;">Customer</label><br />
+            <input class="form-control" type="text" name="order.Customer" required/>
+        </p>
+        <p>
+            <label style="padding-left: 100px;">Phone number</label><br />
+            <input class="form-control" type="text" name="order.PhoneNumber" required/>
+        </p>
+        <p>
+            <div style="padding-bottom:15px; padding-left:170px;">
+                <input class="btn btn-warning" style="margin:auto" type="submit" value="Add">
+            </div>
+        </p>
+    </form>
+</div>
