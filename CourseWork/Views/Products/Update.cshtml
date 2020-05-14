@@ -1,0 +1,29 @@
+﻿@model CourseWork.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div style="padding:25px 25px 25px 25px;">
+    <a class="btn btn-warning" role="button" href="~/Products/GetAll">Back</a>
+</div>
+<div style="padding-top:75px;">
+    <form method="get" action = "~/Products/Change">
+        <h3>Update product</h3>
+        <input class="form-control" type="hidden" name="productId" value="@Model.ProductId" required />
+        <p>
+            <label style="padding-left: 100px;">Name</label><br />
+            <input class="form-control" type="text" name="productName" value="@Model.Name" required />
+        </p>
+        <p>
+            <label style="padding-left: 100px;">Description</label><br />
+            <input class="form-control" type="text" name="description" value="@Model.Description" required />
+        </p>
+        <p>
+            <div style="padding-bottom:15px; padding-left:170px;">
+                <input class="btn btn-warning" style="margin:auto" type="submit" value="Update">
+            </div>
+        </p>
+    </form>
+</div>
