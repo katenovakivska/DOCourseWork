@@ -12,10 +12,8 @@ namespace CourseWork.Models
         public int OrderId { get; set; }
         public int ProductId { get; set; }
         public int Amount { get; set; }
-        public int OldPrice { get; set; }
-        public int NewPrice { get; set; }
-        public int OldSum { get; set; }
-        public int NewSum { get; set; }
+        public int Price { get; set; }
+        public int Sum { get; set; }
         public int WriteOffSum { get; set; }
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseWork;
 using CourseWork.Models;
+using System.Data;
 
 namespace CourseWork.Controllers
 {
@@ -44,113 +45,53 @@ namespace CourseWork.Controllers
 
             return View(product);
         }
-        // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductId == id);
+        [HttpGet]
+        public IActionResult Delete(int productId)
+        {
+            var product = _context.Products.FirstOrDefault(x => x.ProductId == productId);
             if (product == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(GetAll));
             }
-
-            return View(product);
-        }
-
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        
-        
-
-        // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
+            var orderProducts = _context.OrderProducts.Where(x => x.ProductId == product.ProductId);
+            foreach (var op in orderProducts)
             {
-                return NotFound();
+                _context.OrderProducts.Remove(op);
             }
 
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product);
-        }
-
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Description")] Product product)
-        {
-            if (id != product.ProductId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.ProductId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(product);
-        }
-
-        // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductId == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
-        }
-
-        // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var product = await _context.Products.FindAsync(id);
             _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _context.SaveChanges();
+            return RedirectToAction("GetAll", "Products");
         }
 
-        private bool ProductExists(int id)
+        [HttpGet]
+        public IActionResult Update(int productId)
+        { 
+            var product = _context.Products.FirstOrDefault(x => x.ProductId == productId);
+            if (product == null)
+            {
+                return RedirectToAction(nameof(GetAll));
+            }
+            //ViewBag.Product = product;
+            return View(product);
+        }
+
+        [HttpGet]
+        public IActionResult Change(int productId, string productName, string description)
         {
-            return _context.Products.Any(e => e.ProductId == id);
+            var product = _context.Products.FirstOrDefault(x => x.ProductId == productId);
+            if (product == null)
+            {
+                return RedirectToAction(nameof(GetAll));
+            }
+            product.Name = productName;
+            product.Description = description;
+
+            _context.Products.Update(product);
+            _context.SaveChanges();
+
+            return RedirectToAction("GetAll", "Products");
         }
     }
 }

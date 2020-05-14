@@ -11,11 +11,9 @@ namespace CourseWork.Models
         public DateTime Date { get; set; }
         public string Customer { get; set; }
         public string PhoneNumber { get; set; }
-        public int OldAllSum { get; set; }
-        public int NewAllSum { get; set; }
+        public int AllSum { get; set; }
         public int AllWriteOffSum { get; set; }
-        public int OldDisbalance { get; set; }
-        public int NewDisbalance { get; set; }
+        public int Disbalance { get; set; }
         public virtual ICollection<OrderProduct> OrdersProducts { get; set; }
     }
 }

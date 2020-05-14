@@ -3,6 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         body {
@@ -25,11 +28,13 @@
         tr {
             height: 40px;
         }
+
         td {
             max-width: 15%;
         }
+
         form {
-            margin:auto;
+            margin: auto;
             align-content: center;
             background-color: #333334;
             opacity: 0.8;
@@ -45,6 +50,7 @@
             width: auto;
             border-radius: 0;
         }
+
         h3 {
             padding-top: 15px;
             text-align: center;
@@ -55,18 +61,28 @@
         label {
             font-size: 18px;
             margin: auto;
-            align-content:center;
+            align-content: center;
             font-family: 'PT Sans Caption', sans-serif;
             color: #EEF4D5;
         }
+
         input[type=text], select {
             margin: auto;
             width: 50%;
         }
+
+        input[type=checkbox], select {
+            margin: auto;
+            width: 15px;
+            height: 15px;
+        }
+
         input[type=number], select {
             margin: auto;
             width: 50%;
         }
+
+        
 
         .menu-main {
             margin: auto;
@@ -131,10 +147,12 @@
     </style>
 </head>
 <body>
-        <ul class="menu-main">
-            <li>@Html.ActionLink("Catalog", "GetAll", "Products")</li>
-            <li>@Html.ActionLink("Orders", "GetAll", "Orders")</li>
-        </ul>
+    <ul class="menu-main">
+        <li>@Html.ActionLink("Catalog", "GetAll", "Products")</li>
+        <li>@Html.ActionLink("Orders", "GetAll", "Orders")</li>
+        <li>@Html.ActionLink("Random", "Random", "Orders")</li>
+        <li>@Html.ActionLink("File", "ChooseFile", "Orders")</li>
+    </ul>
         @RenderBody()
     <br>
 </body>

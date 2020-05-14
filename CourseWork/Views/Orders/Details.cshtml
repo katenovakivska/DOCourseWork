@@ -9,36 +9,36 @@
 <html>
 <head>
     <title>Warehouse</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 </head>
 <body>
 
-    <div style="padding: 25px 25px 25px 25px;">
+    <div style="padding: 15px 15px 15px 15px;">
         <form class="simple" method="get" action="~/OrderProducts/Create">
             <p><input type="hidden" name="orderId" style="background:unset;" value="@ViewBag.Order.OrderId" /></p>
             <p><input class="btn btn-warning" style="margin:auto" type="submit" value="Add new" /></p>
         </form>
     </div>
+
+
+
     <div>
         <table>
             <tr>
                 <th>Customer</th>
                 <th>Date</th>
                 <th>Phone number</th>
-                <th>Old all sum</th>
-                <th>New all sum</th>
+                <th>All sum</th>
                 <th>All write of sum</th>
-                <th>Old disbalance</th>
-                <th>New disbalance</th>
+                <th>Disbalance</th>
             </tr>
             <tr>
                 <td>@ViewBag.Order.Customer</td>
                 <td>@ViewBag.Order.Date.ToShortDateString()</td>
                 <td>@ViewBag.Order.PhoneNumber</td>
-                <td>@ViewBag.Order.OldAllSum</td>
-                <td>@ViewBag.Order.NewAllSum</td>
+                <td>@ViewBag.Order.AllSum</td>
                 <td>@ViewBag.Order.AllWriteOffSum</td>
-                <td>@ViewBag.Order.OldDisbalance</td>
-                <td>@ViewBag.Order.NewDisbalance</td>
+                <td>@ViewBag.Order.Disbalance</td>
             </tr>
         </table>
     </div>
@@ -47,53 +47,76 @@
             <tr>
                 <th>Product</th>
                 <th>Description</th>
-                <th>Old price</th>
-                <th>New price</th>
-                <th>Old sum</th>
-                <th>New sum</th>
+                <th>Price</th>
+                <th>Sum</th>
                 <th>Amount</th>
                 <th>Write-Off Sum</th>
-                
+
             </tr>
             @foreach (var product in Model)
             {
-        <tr>
-            <td>@product.Product.Name</td>
-            <td>@product.Product.Description</td>
-            <td>@product.OldPrice</td>
-            <td>@product.NewPrice</td>
-            <td>@product.OldSum</td>
-            <td>@product.NewSum</td>
-            <td>@product.Amount</td>
-            <td>@product.WriteOffSum</td>
-            <td>
-                <div style="padding-right:15px;padding-bottom: 20px;">
-                    <form method="get" action="~/OrderProducts/Delete">
-                        <input type="hidden" name="orderId" style="height:5px;" value="@ViewBag.Order.OrderId" />
-                        <input type="hidden" name="productId" value="@product.Product.ProductId" /><br>
-                        <input class="btn btn-warning" style="padding-right:15px" type="submit" value="Delete" />
-                    </form>
-                </div>
-            </td>
-            @*<td>
-            <div style="padding:25px 25px 25px 25px;">
-                <form method="get" action="~/Order/Details">
-                    <input type="hidden" name="orderId" value="@order.OrderId" />
-                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Details" />
-                </form>
-            </div>
-        </td>
-        <td>
-            <div style="padding:25px 25px 25px 25px;">
-                <form method="delete">
-                    <input type="hidden" name="orderId" value="@order.OrderId" />
-                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Delete" />
-                </form>
-            </div>
-        </td>*@
-        </tr>
+                <tr>
+                    <td>@product.Product.Name</td>
+                    <td>@product.Product.Description</td>
+                    <td>@product.Price</td>
+                    <td>@product.Sum</td>
+                    <td>@product.Amount</td>
+                    <td>@product.WriteOffSum</td>
+                    <td>
+                        <div style="padding-right:15px;padding-bottom: 20px;">
+                            <form method="get" action="~/OrderProducts/Delete">
+                                <input type="hidden" name="orderId" style="height:5px;" value="@ViewBag.Order.OrderId" />
+                                <input type="hidden" name="productId" value="@product.Product.ProductId" /><br>
+                                <input class="btn btn-warning" style="padding-right:15px" type="submit" value="Delete" />
+                            </form>
+                        </div>
+                    </td>
+                   
+                </tr>
             }
         </table>
     </div>
+    <div style="padding: 15px 15px 15px 15px;">
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Improves
+        </button>
+        </div>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body" style="background-color: #ffc107; opacity: 0.8;">
+                <h3>Frank-Wolf algorithm</h3>
+                @if (ViewBag.Products != null)
+                {
+                    <table style="background-color:#ffc107; color: #333334; padding-top: 15px; font-size: 18px; opacity: 1.0;">
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Sum</th>
+                            <th>Amount</th>
+                            <th>Write-Off Sum</th>
+
+                        </tr>
+                        @foreach (var p in ViewBag.Products)
+                        {
+                            <tr>
+                                <td>@p.Product.Name</td>
+                                <td>@p.Price</td>
+                                <td>@p.Sum</td>
+                                <td>@p.Amount</td>
+                                <td>@p.WriteOffSum</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">Sum: @ViewBag.Sum</p>
+                <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">All write-off sum: @ViewBag.AllSum</p>
+                <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">Disbalance: @ViewBag.Disbalance</p>
+
+            </div>
+        </div>
+
+     
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>

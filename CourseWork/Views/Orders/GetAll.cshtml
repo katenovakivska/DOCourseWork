@@ -21,8 +21,7 @@
             <th>Customer</th>
             <th>Date</th>
             <th>Phone number</th>
-            <th>Old all sum</th>
-            <th>New all sum</th>
+            <th>All sum</th>
             <th>All write of sum</th>
             <th>Disbalance</th>
         </tr>
@@ -32,11 +31,9 @@
         <td>@order.Customer</td>
         <td>@order.Date.ToShortDateString()</td>
         <td>@order.PhoneNumber</td>
-        <td>@order.OldAllSum</td>
-        <td>@order.NewAllSum</td>
+        <td>@order.AllSum</td>
         <td>@order.AllWriteOffSum</td>
-        <td>@order.OldDisbalance</td>
-        <td>@order.NewDisbalance</td>
+        <td>@order.Disbalance</td>
 
         <td>
             <div style="padding:25px 25px 25px 25px;">
@@ -48,7 +45,15 @@
         </td>
         <td>
             <div style="padding:25px 25px 25px 25px;">
-                <form method="delete">
+                <form method="get" action="~/Orders/Update">
+                    <input type="hidden" name="orderId" value="@order.OrderId" />
+                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Update" />
+                </form>
+            </div>
+        </td>
+        <td>
+            <div style="padding:25px 25px 25px 25px;">
+                <form method="get" action="~/Orders/Delete">
                     <input type="hidden" name="orderId" value="@order.OrderId" />
                     <input class="btn btn-warning" style="margin:auto" type="submit" value="Delete" />
                 </form>

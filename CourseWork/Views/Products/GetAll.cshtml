@@ -21,11 +21,26 @@
         </tr>
         @foreach (var product in Model)
         {
-            <tr>
-                <td>@product.Name</td>
-                <td>@product.Description</td>
-                @*<td><a href="~/Home/Buy/@phone.Id">Купить</a></td>*@
-            </tr>
+    <tr>
+        <td>@product.Name</td>
+        <td>@product.Description</td>
+        <td>
+            <div style="padding:25px 25px 25px 25px;">
+                <form method="get" action="~/Products/Delete">
+                    <input type="hidden" name="productId" value="@product.ProductId" />
+                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Delete" />
+                </form>
+            </div>
+        </td>
+        <td>
+            <div style="padding:25px 25px 25px 25px;">
+                <form method="get" action="~/Products/Update">
+                    <input type="hidden" name="productId" value="@product.ProductId" />
+                    <input class="btn btn-warning" style="margin:auto" type="submit" value="Update" />
+                </form>
+            </div>
+        </td>
+    </tr>
         }
     </table>
 

@@ -26,6 +26,9 @@ namespace CourseWork.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AllSum")
+                        .HasColumnType("int");
+
                     b.Property<int>("AllWriteOffSum")
                         .HasColumnType("int");
 
@@ -35,16 +38,7 @@ namespace CourseWork.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("NewAllSum")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NewDisbalance")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OldAllSum")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OldDisbalance")
+                    b.Property<int>("Disbalance")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
@@ -66,16 +60,10 @@ namespace CourseWork.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("NewPrice")
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("NewSum")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OldPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OldSum")
+                    b.Property<int>("Sum")
                         .HasColumnType("int");
 
                     b.Property<int>("WriteOffSum")
