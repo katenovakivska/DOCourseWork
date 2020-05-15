@@ -8,7 +8,7 @@ namespace CourseWork.Methods
 {
     public class FrankWolf
     {
-        public int[] FrankWolfMethod(Order order, IEnumerable<OrderProduct> orderProducts, int disbalance)
+        public int[] FrankWolfMethod(Order order, IEnumerable<OrderProduct> orderProducts)
         {
             int count = orderProducts.Count();
             int[] x0 = new int[count];
@@ -23,7 +23,6 @@ namespace CourseWork.Methods
             int[] fAlphaMarch = new int[2];
             int[] xNew = new int[count];
             double eps = 0.5;
-
             List<string> grad = new List<string>();
             int i = 0, fx0 = 0;
             int fxNew = 0;
@@ -33,8 +32,19 @@ namespace CourseWork.Methods
                 fx[i] = op.Amount;
                 i++;
             }
-
-            gradient = Gradient(gradient, count, fx0, x0, fx);
+            for (int j = 0; j < count + 1; j++)
+            {
+                if (j != count)
+                {
+                    fx0 = fx0 + x0[j] * fx[j];
+                }
+                else
+                {
+                    fx0 = fx0 - fx[j];
+                    fx0 = (int)Math.Pow(fx0, 2);
+                }
+            }
+            gradient = Gradient(gradient, count, x0, fx);
 
             simplexTable = SimplexTable(simplexTable, count, gradient, x0);
             for (int k = 0; k < 2 * count; k++)
@@ -84,24 +94,12 @@ namespace CourseWork.Methods
                     fxNew = (int)Math.Pow(fxNew, 2);
                 }
             }
-            disbalance = Math.Abs(fx0 - fxNew);
+           
             return xNew;
         }
 
-        public int[] Gradient(int[] gradient, int count, int fx0, int[] x0, int[] fx)
+        public int[] Gradient(int[] gradient, int count, int[] x0, int[] fx)
         {
-            for (int j = 0; j < count + 1; j++)
-            {
-                if (j != count)
-                {
-                    fx0 = fx0 + x0[j] * fx[j];
-                }
-                else
-                {
-                    fx0 = fx0 - fx[j];
-                    fx0 = (int)Math.Pow(fx0, 2);
-                }
-            }
 
             for (int j = 0; j < count; j++)
             {
