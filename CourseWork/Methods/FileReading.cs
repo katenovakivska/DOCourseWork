@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseWork.Models;
+using Microsoft.VisualBasic;
 
 namespace CourseWork.Methods
 {
@@ -39,6 +40,7 @@ namespace CourseWork.Methods
                 }
             }
             count = num.GetLength(1);
+
             return order;
         }
 

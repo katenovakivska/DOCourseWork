@@ -285,16 +285,22 @@ namespace CourseWork.Controllers
             Product product = new Product();
             OrderProduct orderProduct = new OrderProduct();
             List<OrderProduct> orderProducts = new List<OrderProduct>();
-
+            
             int count = fileReading.count;
-            order = GenerateOrder(order);
-            for (int i = 0; i < count; i++)
+            //order = GenerateOrder(order);
+            order = fileReading.FileRead(fileName);
+            order = AddOrder(order);
+            
+            //orderProducts = order.OrdersProducts;
+            //for (int i = 0; i < count; i++)
+            foreach (var op in order.OrdersProducts)
             {
                 product = new Product();
                 orderProduct = new OrderProduct();
-                product = GenerateProduct(product);
-                orderProduct.Amount = fileReading.num[0, i];
-                orderProduct.WriteOffSum = fileReading.num[1, i];
+                //product = GenerateProduct(product);
+                product = AddProduct(op.Product);
+                orderProduct.Amount =op.Amount /*fileReading.num[0, i]*/;
+                orderProduct.WriteOffSum = op.WriteOffSum /*fileReading.num[1, i]*/;
                 orderProduct = FileOrderProducts(order.OrderId, product.ProductId, orderProduct);
                 orderProducts.Add(orderProduct);
             }
@@ -325,7 +331,21 @@ namespace CourseWork.Controllers
             _context.SaveChanges();
             return View(orderProducts);
         }
+        public Order AddOrder(Order order)
+        {
+            _context.Orders.Add(order);
+            _context.SaveChanges();
 
+            return order;
+        
+        }
+        public Product AddProduct(Product product)
+        {
+            _context.Products.Add(product);
+            _context.SaveChanges();
+
+            return product;
+        }
         public OrderProduct FileOrderProducts(int orderId, int productId, OrderProduct orderProduct)
         {
             Random random = new Random();
