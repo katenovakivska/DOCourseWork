@@ -298,10 +298,10 @@ namespace CourseWork.Controllers
                 product = new Product();
                 orderProduct = new OrderProduct();
                 //product = GenerateProduct(product);
-                product = AddProduct(op.Product);
+                //product = AddProduct(op.Product);
                 orderProduct.Amount =op.Amount /*fileReading.num[0, i]*/;
                 orderProduct.WriteOffSum = op.WriteOffSum /*fileReading.num[1, i]*/;
-                orderProduct = FileOrderProducts(order.OrderId, product.ProductId, orderProduct);
+                orderProduct = FileOrderProducts(order.OrderId, op.Product.ProductId,/*product.ProductId,*/ orderProduct);
                 orderProducts.Add(orderProduct);
             }
 
