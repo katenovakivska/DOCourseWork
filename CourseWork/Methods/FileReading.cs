@@ -31,7 +31,7 @@ namespace CourseWork.Methods
                     orderProduct.Product = new Product();
                     orderProduct.Product.Name = temp[0];
                     orderProduct.Amount = Convert.ToInt32(temp[1]);
-                    orderProduct.Sum = Convert.ToInt32(temp[2]);
+                    orderProduct.WriteOffSum = Convert.ToInt32(temp[2]);
                     order.OrdersProducts.Add(orderProduct);
                 }
                 else

@@ -35,6 +35,7 @@ namespace CourseWork.Methods
             Constraints = constraints;
         }
 
+
         public long count_fx(int[] x_point)
         {
             long fx = 0l;
@@ -45,6 +46,41 @@ namespace CourseWork.Methods
             fx -= S;
             return Math.Abs(fx);
         }
-        
+
+    }
+
+    class TaskPair : IComparable
+    {
+        public int[] X;
+        public long Fx;
+
+        public TaskPair(int[] x, long fx)
+        {
+            X = x;
+            Fx = fx;
+        }
+
+        public TaskPair()
+        {
+
+        }
+
+        public int CompareTo(Object obj)
+        {
+            return Convert.ToInt32(Fx - ((TaskPair)obj).Fx);
+        }
+
+        public static void Shuffle(IList<TaskPair> ts)
+        {
+            Random rand = new Random();
+            var count = ts.Count;
+            for (var i = 0; i < count - 1; ++i)
+            {
+                var r = rand.Next(i, count);
+                var tmp = ts[i];
+                ts[i] = ts[r];
+                ts[r] = tmp;
+            }
+        }
     }
 }
