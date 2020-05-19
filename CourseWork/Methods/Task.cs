@@ -38,7 +38,7 @@ namespace CourseWork.Methods
 
         public long count_fx(int[] x_point)
         {
-            long fx = 0l;
+            long fx = 0;
             for(int i = 0; i < x_point.Length; i++)
             {
                 fx += Q[i] * x_point[i];

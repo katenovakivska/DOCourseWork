@@ -113,12 +113,13 @@ namespace CourseWork.Controllers
             
             }
             ViewBag.Order = order;
-            int disbalance = 0;
+            
             List<OrderProduct> changed = new List<OrderProduct>(); 
             if(orderProducts.Count() != 0 || orderProducts.Count() != 1)
             {
-                var xNew = frank.FrankWolfMethod(order, orderProducts, disbalance).ToList();
-                ViewBag.Disbalance = disbalance;
+                int count = orderProducts.Count();
+                var xNew = frank.FrankWolfMethod(order, orderProducts).ToList();
+                
                 changed = BetterPrices(changed, orderProducts, xNew);
                 
                 ViewBag.Products = changed;
@@ -130,6 +131,7 @@ namespace CourseWork.Controllers
                 }
                 ViewBag.Sum = sum;
                 ViewBag.AllSum = writeOff;
+                ViewBag.Disbalance = Math.Abs(sum - writeOff);
             }
           
             return View(orderProducts);
@@ -178,12 +180,14 @@ namespace CourseWork.Controllers
                 p.Product = _context.Products.FirstOrDefault(x => x.ProductId == p.ProductId);
             }
             ViewBag.Order = order;
-            int disbalance = 0;
+
             List<OrderProduct> changed = new List<OrderProduct>();
             if (orderProducts.Count() != 0)
             {
-                var xNew = frank.FrankWolfMethod(order, orderProducts, disbalance).ToList();
-                ViewBag.Disbalance = disbalance;
+                
+                var xNew = frank.FrankWolfMethod(order, orderProducts).ToList();
+                
+                
                 changed = BetterPrices(changed, orderProducts, xNew);
 
                 ViewBag.Products = changed;
@@ -195,6 +199,7 @@ namespace CourseWork.Controllers
                 }
                 ViewBag.Sum = sum;
                 ViewBag.AllSum = writeOff;
+                ViewBag.Disbalance = Math.Abs(sum - writeOff);
             }
             _context.SaveChanges();
             return View(orderProducts);
@@ -279,23 +284,26 @@ namespace CourseWork.Controllers
         public IActionResult File(string fileName)
         {
             FileReading fileReading = new FileReading();
-            fileReading.FileRead(fileName);
             FrankWolf frank = new FrankWolf();
             Order order = new Order();
             Product product = new Product();
             OrderProduct orderProduct = new OrderProduct();
             List<OrderProduct> orderProducts = new List<OrderProduct>();
-
+            
             int count = fileReading.count;
-            order = GenerateOrder(order);
-            for (int i = 0; i < count; i++)
+            order = fileReading.FileRead(fileName);
+            order = AddOrder(order);
+            order.AllSum = 0;
+
+            foreach (var op in order.OrdersProducts)
             {
                 product = new Product();
                 orderProduct = new OrderProduct();
-                product = GenerateProduct(product);
-                orderProduct.Amount = fileReading.num[0, i];
-                orderProduct.WriteOffSum = fileReading.num[1, i];
-                orderProduct = FileOrderProducts(order.OrderId, product.ProductId, orderProduct);
+                orderProduct.Amount =op.Amount;
+                orderProduct.WriteOffSum = op.WriteOffSum;
+                orderProduct.OrderId = order.OrderId;
+                orderProduct.ProductId = op.Product.ProductId;
+                order = FileOrderProducts(orderProduct);
                 orderProducts.Add(orderProduct);
             }
 
@@ -304,12 +312,11 @@ namespace CourseWork.Controllers
                 p.Product = _context.Products.FirstOrDefault(x => x.ProductId == p.ProductId);
             }
             ViewBag.Order = order;
-            int disbalance = 0;
+            
             List<OrderProduct> changed = new List<OrderProduct>();
             if (orderProducts.Count() != 0)
             {
-                var xNew = frank.FrankWolfMethod(order, orderProducts, disbalance).ToList();
-                ViewBag.Disbalance = disbalance;
+                var xNew = frank.FrankWolfMethod(order, orderProducts).ToList();
                 changed = BetterPrices(changed, orderProducts, xNew);
 
                 ViewBag.Products = changed;
@@ -321,32 +328,37 @@ namespace CourseWork.Controllers
                 }
                 ViewBag.Sum = sum;
                 ViewBag.AllSum = writeOff;
+                ViewBag.Disbalance = Math.Abs(sum - writeOff);
             }
             _context.SaveChanges();
             return View(orderProducts);
         }
-
-        public OrderProduct FileOrderProducts(int orderId, int productId, OrderProduct orderProduct)
+        public Order AddOrder(Order order)
         {
-            Random random = new Random();
+            _context.Orders.Add(order);
+            _context.SaveChanges();
 
-            orderProduct.OrderId = orderId;
-            orderProduct.ProductId = productId;
+            return order;
+        
+        }
+        public Order FileOrderProducts(OrderProduct orderProduct)
+        {
+
             double k = orderProduct.WriteOffSum / orderProduct.Amount;
             orderProduct.Price = (int)Math.Round(k);
             double m = orderProduct.Amount * orderProduct.Price;
             orderProduct.Sum = (int)Math.Round(m);
-            _context.OrderProducts.Add(orderProduct);
-            _context.SaveChanges();
 
-            var order = _context.Orders.FirstOrDefault(x => x.OrderId == orderId);
+            var order = _context.Orders.FirstOrDefault(x => x.OrderId == orderProduct.OrderId);
+            order.Customer = "Customer";
+            order.Date = DateTime.Now;
             order.AllWriteOffSum = order.AllWriteOffSum + orderProduct.WriteOffSum;
             order.AllSum = order.AllSum + (orderProduct.Amount * orderProduct.Price);
             order.Disbalance = Math.Abs(order.AllWriteOffSum - order.AllSum);
             _context.Orders.Update(order);
             _context.SaveChanges();
 
-            return orderProduct;
+            return order;
         }
     }
 }

@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using CourseWork.Models;
+using Microsoft.VisualBasic;
 
 namespace CourseWork.Methods
 {
@@ -18,7 +20,7 @@ namespace CourseWork.Methods
             Order order = new Order();
             order.OrdersProducts = new List<OrderProduct>();
             string path = @".\Files\";
-            string[] lines = File.ReadAllLines($"{path}{file}", Encoding.Default);
+            string[] lines = File.ReadAllLines($"{path}{file}", Encoding.GetEncoding(1251));
             num = new int[lines[0].Split(';').Length-1, lines.Length-2];
             for (int i = 1; i < lines.Length; i++)
             {
@@ -40,6 +42,7 @@ namespace CourseWork.Methods
                 }
             }
             count = num.GetLength(1);
+
             return order;
         }
 
