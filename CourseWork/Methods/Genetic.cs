@@ -12,11 +12,13 @@ namespace CourseWork.Methods
         private Task IndividualTask;
         private int parentsQuantity;
         private int n;
+        private int NumberOfIterations;
         private Random rand = new Random();
 
-        public Genetic(Task individualTask)
+        public Genetic(Task individualTask, int numberOfIterations)
         {
             IndividualTask = individualTask;
+            NumberOfIterations = numberOfIterations;
             n = IndividualTask.X_start.Length;
             parentsQuantity = 15 * n;
         }
@@ -32,6 +34,8 @@ namespace CourseWork.Methods
         
         private TaskPair get_children(IList<TaskPair> parents, long record, int lasting)
         {
+            if (parents.Count % 2 != 0)
+                parents.RemoveAt(parents.Count-1);
             ICollection<TaskPair> iterationNodes = new SortedSet<TaskPair>();
             foreach(TaskPair parent in parents)
             {
@@ -55,27 +59,29 @@ namespace CourseWork.Methods
 
             }
             long newRecord = iterationNodes.First().Fx;
-            if ((newRecord == record && lasting == 99) || newRecord == 0)
+            if ((newRecord == record && lasting == NumberOfIterations-1) || newRecord == 0)
             {
                 return iterationNodes.First();
             }
             else
             {
-                IList<TaskPair> iterationNodesList = iterationNodes
-                .Take(3 * iterationNodes.Count / 4)
-                .ToList();
-                IList<TaskPair> new_nodes = iterationNodes
-                    .Take(parentsQuantity / 2)
+                IList<TaskPair> new_nodes;
+                int halfOfParents = parentsQuantity / 2;
+                int nodesToRemain = 3 * iterationNodes.Count / 4;
+                int delta = nodesToRemain - halfOfParents;
+                if (delta < halfOfParents)
+                    nodesToRemain += halfOfParents - delta;
+                    IList<TaskPair> iterationNodesList = iterationNodes
+                        .Take(nodesToRemain)
+                        .ToList();
+                    new_nodes = iterationNodes
+                    .Take(halfOfParents)
                     .ToList();
-                foreach (TaskPair addedNode in new_nodes)
-                    iterationNodesList.Remove(addedNode);
-                TaskPair.Shuffle(iterationNodesList);
-                for (int i = 0; i < Math.Min(parentsQuantity / 2, iterationNodesList.Count); i++)
-                    new_nodes.Add(iterationNodesList.ElementAt(i));
-                if (new_nodes.Count%2 != 0)
-                {
-                    new_nodes.RemoveAt(new_nodes.Count - 1);
-                }
+                    foreach (TaskPair addedNode in new_nodes)
+                        iterationNodesList.Remove(addedNode);
+                    TaskPair.Shuffle(iterationNodesList);
+                    for (int i = 0; i < Math.Min(halfOfParents, iterationNodesList.Count); i++)
+                        new_nodes.Add(iterationNodesList.ElementAt(i));
                 if (newRecord == record)
                     return get_children(new_nodes, newRecord, lasting + 1);
                 else

@@ -53,11 +53,7 @@ namespace CourseWork.Methods
 
     }
 
-<<<<<<< HEAD
     public class TaskPair : IComparable
-=======
-    class TaskPair : IComparable
->>>>>>> 3a6a377ee75e1a512545239777ea5fe495de81cc
     {
         public int[] X;
         public long Fx;

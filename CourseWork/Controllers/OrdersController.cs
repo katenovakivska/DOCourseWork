@@ -203,26 +203,10 @@ namespace CourseWork.Controllers
         public IActionResult Random()
         {
             FrankWolf frank = new FrankWolf();
-            Order order = new Order();
-            Product product = new Product();
-            OrderProduct orderProduct = new OrderProduct();
             //List<OrderProduct> orderProducts = new List<OrderProduct>();
             Random random = new Random();
             int count = random.Next(4, 8);
-            order = GenerateOrder(order);
-            order.OrdersProducts = new List<OrderProduct>();
-            for (int i = 0; i < count; i++)
-            {
-                product = new Product();
-                orderProduct = new OrderProduct();
-                product = GenerateProduct(product);
-                orderProduct = GenerateOrderProducts(order, product, orderProduct);
-                order.AllWriteOffSum = order.AllWriteOffSum + orderProduct.WriteOffSum;
-                order.AllSum = order.AllSum + (orderProduct.Amount * orderProduct.Price);
-                order.Disbalance = Math.Abs(order.AllWriteOffSum - order.AllSum);
-                order.OrdersProducts.Add(orderProduct);
-                //orderProducts.Add(orderProduct);
-            }
+            Order order = RandomHandler.GetRandomizedOrder(count);
 
             //foreach (var p in orderProducts)
             //{
@@ -293,54 +277,7 @@ namespace CourseWork.Controllers
             _context.SaveChanges();
             return View(order.OrdersProducts);
         }
-
-        public Order GenerateOrder(Order order)
-        {
-            Random random = new Random();
-            const string chars = "0123456789";
-            order.Date = DateTime.Now;
-            order.Customer = "Customer";
-            order.PhoneNumber = new string(Enumerable.Repeat(chars, 12).Select(s => s[random.Next(s.Length)]).ToArray());
-
-           // _context.Orders.Add(order);
-           //_context.SaveChanges();
-
-            return order;
-        }
-
-        public Product GenerateProduct(Product product)
-        {
-            Random random = new Random();
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            product.Name = new string(Enumerable.Repeat(chars, 9).Select(s => s[random.Next(s.Length)]).ToArray());
-            product.Description = "Description";
-            //_context.Products.Add(product);
-            //_context.SaveChanges();
-
-            return product;
-        }
-        public OrderProduct GenerateOrderProducts(Order order, Product product, OrderProduct orderProduct)
-        {
-            Random random = new Random();
-
-            orderProduct.Order = order;
-            orderProduct.Product = product;
-            orderProduct.WriteOffSum = random.Next(10000, 25000);
-            orderProduct.Amount = random.Next(2, 8);
-            orderProduct.Price = (int)Math.Round((double)orderProduct.WriteOffSum / orderProduct.Amount);
-            orderProduct.Sum = (int)Math.Round((double)orderProduct.Amount * orderProduct.Price);
-            //_context.OrderProducts.Add(orderProduct);
-            //_context.SaveChanges();
-
-           // var order = _context.Orders.FirstOrDefault(x => x.OrderId == orderId);
-            //order.AllWriteOffSum = order.AllWriteOffSum + orderProduct.WriteOffSum;
-            //order.AllSum = order.AllSum + (orderProduct.Amount * orderProduct.Price);
-            //order.Disbalance = Math.Abs(order.AllWriteOffSum - order.AllSum);
-            //_context.Orders.Update(order);
-            //_context.SaveChanges();
-
-            return orderProduct;
-        }
+        
         public List<OrderProduct> BetterPrices(List<OrderProduct> changed, List<OrderProduct> orderProducts, List<int> xNew)
         {
             int index = 0;
