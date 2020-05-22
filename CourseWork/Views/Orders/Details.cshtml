@@ -71,52 +71,127 @@
                             </form>
                         </div>
                     </td>
-                   
+
                 </tr>
             }
         </table>
     </div>
     <div style="padding: 15px 15px 15px 15px;">
-        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Improves
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+            Frank-Wolf algorithm
         </button>
-        </div>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body" style="background-color: #ffc107; opacity: 0.8;">
-                <h3>Frank-Wolf algorithm</h3>
-                @if (ViewBag.Products != null)
-                {
-                    <table style="background-color:#ffc107; color: #333334; padding-top: 15px; font-size: 18px; opacity: 1.0;">
+
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+            Simulated annealing algorithm
+        </button>
+
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+            Genetic algorithm
+        </button>
+    </div>
+
+    <div class="collapse" id="collapseExample1">
+        <div class="card card-body" style="background-color: #ffc107; opacity: 0.8;">
+            <h3>Frank-Wolf algorithm</h3>
+            @if (ViewBag.Products!= null)
+            {
+                <table style="background-color:#ffc107; color: #333334; padding-top: 15px; font-size: 18px; opacity: 1.0;">
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Sum</th>
+                        <th>Amount</th>
+                        <th>Write-Off Sum</th>
+
+                    </tr>
+                    @foreach (var p in ViewBag.Products)
+                    {
                         <tr>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Sum</th>
-                            <th>Amount</th>
-                            <th>Write-Off Sum</th>
-
+                            <td>@p.Product.Name</td>
+                            <td>@p.Price</td>
+                            <td>@p.Sum</td>
+                            <td>@p.Amount</td>
+                            <td>@p.WriteOffSum</td>
                         </tr>
-                        @foreach (var p in ViewBag.Products)
-                        {
-                            <tr>
-                                <td>@p.Product.Name</td>
-                                <td>@p.Price</td>
-                                <td>@p.Sum</td>
-                                <td>@p.Amount</td>
-                                <td>@p.WriteOffSum</td>
-                            </tr>
-                        }
-                    </table>
-                }
-                <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">Sum: @ViewBag.Sum</p>
-                <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">All write-off sum: @ViewBag.AllSum</p>
-                <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">Disbalance: @ViewBag.Disbalance</p>
+                    }
+                </table>
+            }
+            <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">Sum: @ViewBag.Sum</p>
+            <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">All write-off sum: @ViewBag.AllSum</p>
+            <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">Disbalance: @ViewBag.Disbalance</p>
 
-            </div>
         </div>
+    </div>
 
-     
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <div class="collapse" id="collapseExample2">
+        <div class="card card-body" style="background-color: #ffc107; opacity: 0.8;">
+            <h3>Simulated Annealing algorithm</h3>
+            @if (ViewBag.ProductsAnnealing != null)
+            {
+                <table style="background-color:#ffc107; color: #333334; padding-top: 15px; font-size: 18px; opacity: 1.0;">
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Sum</th>
+                        <th>Amount</th>
+                        <th>Write-Off Sum</th>
+
+                    </tr>
+                    @foreach (var p in ViewBag.ProductsAnnealing)
+                    {
+                        <tr>
+                            <td>@p.Product.Name</td>
+                            <td>@p.Price</td>
+                            <td>@p.Sum</td>
+                            <td>@p.Amount</td>
+                            <td>@p.WriteOffSum</td>
+                        </tr>
+                    }
+                </table>
+            }
+            <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">Sum: @ViewBag.SumAnnealing</p>
+            <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">All write-off sum: @ViewBag.AllSumAnnealing</p>
+            <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">Disbalance: @ViewBag.DisbalanceAnnealing</p>
+
+        </div>
+    </div>
+
+    <div class="collapse" id="collapseExample3">
+        <div class="card card-body" style="background-color: #ffc107; opacity: 0.8;">
+            <h3>Genetic algorithm</h3>
+            @if (ViewBag.ProductsGenetic != null)
+            {
+                <table style="background-color:#ffc107; color: #333334; padding-top: 15px; font-size: 18px; opacity: 1.0;">
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Sum</th>
+                        <th>Amount</th>
+                        <th>Write-Off Sum</th>
+
+                    </tr>
+                    @foreach (var p in ViewBag.ProductsGenetic)
+                    {
+                        <tr>
+                            <td>@p.Product.Name</td>
+                            <td>@p.Price</td>
+                            <td>@p.Sum</td>
+                            <td>@p.Amount</td>
+                            <td>@p.WriteOffSum</td>
+                        </tr>
+                    }
+                </table>
+            }
+            <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">Sum: @ViewBag.SumGenetic</p>
+            <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">All write-off sum: @ViewBag.AllSumGenetic</p>
+            <p style="color:  #333334; font-size: 18px; font-family: 'PT Sans Caption', sans-serif;">Disbalance: @ViewBag.DisbalanceGenetic</p>
+
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>

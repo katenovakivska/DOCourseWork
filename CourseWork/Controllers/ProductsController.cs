@@ -11,6 +11,8 @@ using System.Data;
 
 namespace CourseWork.Controllers
 {
+    //[Produces("application/json")]
+    //[Route("~/Products")]
     public class ProductsController : Controller
     {
         OrderContext _context;
@@ -18,12 +20,13 @@ namespace CourseWork.Controllers
         public ProductsController(OrderContext context)
         {
             _context = context;
-        }
+        } 
 
         [HttpGet]
         public IActionResult GetAll()
         {
             var products = _context.Products.ToList();
+            //return Ok(products);
             return View(products);
         }
 
@@ -42,10 +45,9 @@ namespace CourseWork.Controllers
             }
             _context.Products.Add(product);
             _context.SaveChanges();
-
             return View(product);
         }
-
+    
         [HttpGet]
         public IActionResult Delete(int productId)
         {
@@ -62,12 +64,13 @@ namespace CourseWork.Controllers
 
             _context.Products.Remove(product);
             _context.SaveChanges();
+            
             return RedirectToAction("GetAll", "Products");
         }
 
         [HttpGet]
         public IActionResult Update(int productId)
-        { 
+        {
             var product = _context.Products.FirstOrDefault(x => x.ProductId == productId);
             if (product == null)
             {
