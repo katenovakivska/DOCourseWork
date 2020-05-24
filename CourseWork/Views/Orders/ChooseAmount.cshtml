@@ -1,7 +1,9 @@
-﻿
+﻿@model CourseWork.Models.Order
+
 @{
-    ViewData["Title"] = "ChooseFile";
+    ViewData["Title"] = "Choose ";
 }
+
 <!DOCTYPE html>
 
 <html>
@@ -11,19 +13,14 @@
 </head>
 <body>
     <div class="form-check" style="padding-top: 60px;">
-        <form method="get" action="~/Orders/File" style="padding-top: 25px; padding-left: 155px;" >
-            @foreach (var file in ViewBag.Files)
-            {
-                <p>
-                        <input class="form-check-input" type="radio" name="fileName" id="exampleRadios1" value="@file">
-                        <label class="form-check-label" for="exampleRadios1">
-                            @file
-                        </label>
-                </p>
-
-            }
+        <form method="get" action="~/Orders/Random" style="padding-top: 25px;">
             <p>
-                <div style="padding-bottom:15px; padding-left:15px;">
+                <label style="padding-left: 115px;">Amount of products</label><br />
+                <input class="form-control" type="number" name="Amount" value="Amount" required>
+
+            </p>
+            <p>
+                <div style="padding-bottom:15px; padding-left:165px;">
                     <input class="btn btn-warning" style="margin:auto" type="submit" value="Open">
                 </div>
             </p>

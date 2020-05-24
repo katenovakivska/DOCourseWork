@@ -7,7 +7,7 @@ using System.Text;
 
 namespace CourseWork.Methods
 {
-    class SimulatedAnnealing
+    public class SimulatedAnnealing
     {
         private Task IndividualTask;
         private int n;

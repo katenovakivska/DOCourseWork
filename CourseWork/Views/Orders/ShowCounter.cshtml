@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "ShowCounter";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Warehouse</title>
+</head>
+<body>
+    <div style="padding-top: 60px;">
+    <div style="        background-color: #ffc107;
+        opacity: 0.8;
+">
+    <table style="background-color: #ffc107; color: #333334; font-size: 18px; opacity: 1.0;">
+        <tr>
+            <th>Algorithm</th>
+            <th>Average time</th>
+            <th>Better cases</th>
+            
+        </tr>
+            <tr>
+                <td>Frank-Wolf</td>
+                <td>@ViewBag.Counter.WolfAvg</td>
+                <td>@ViewBag.Counter.FrankBetter</td>
+            </tr>
+            <tr>
+                <td>Genetic</td>
+                <td>@ViewBag.Counter.GeneticAvg</td>
+                <td>@ViewBag.Counter.GeneticBetter</td>
+            </tr>
+            <tr>
+                <td>Simulated Annealing</td>
+                <td>@ViewBag.Counter.AnnealAvg</td>
+                <td>@ViewBag.Counter.AnnealBetter</td>
+            </tr>
+    </table>
+        </div>
+        </div>
+</body>
+</html>

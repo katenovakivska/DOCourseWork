@@ -134,8 +134,6 @@ C:\Users\Katya\source\repos\CourseWork\CourseWork\bin\Debug\netcoreapp3.1\runtim
 C:\Users\Katya\source\repos\CourseWork\CourseWork\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Katya\source\repos\CourseWork\CourseWork\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Katya\source\repos\CourseWork\CourseWork\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.csproj.CoreCompileInputs.cache
-C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.RazorAssemblyInfo.cache
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.RazorAssemblyInfo.cs
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.AssemblyInfoInputs.cache
@@ -147,12 +145,9 @@ C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\OrderProducts\Create.cshtml.g.cs
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\OrderProducts\Delete.cshtml.g.cs
-C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\OrderProducts\Details.cshtml.g.cs
-C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\OrderProducts\Edit.cshtml.g.cs
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\OrderProducts\Index.cshtml.g.cs
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\Orders\ChooseFile.cshtml.g.cs
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Create.cshtml.g.cs
-C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Delete.cshtml.g.cs
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Details.cshtml.g.cs
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\Orders\File.cshtml.g.cs
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\Orders\GetAll.cshtml.g.cs
@@ -177,4 +172,9 @@ C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\static
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.dll
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.pdb
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.genruntimeconfig.cache
+C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\Orders\ChooseAmount.cshtml.g.cs
 C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.csprojAssemblyReference.cache
+C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.csproj.CoreCompileInputs.cache
+C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\CourseWork.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\Orders\ShowCounter.cshtml.g.cs
+C:\Users\Katya\source\repos\CourseWork\CourseWork\obj\Debug\netcoreapp3.1\Razor\Views\Orders\ChooseCounter.cshtml.g.cs

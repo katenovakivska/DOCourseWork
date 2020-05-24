@@ -7,16 +7,25 @@ using CourseWork.Models;
 
 namespace CourseWork.Methods
 {
-    class Genetic
+    public class Genetic
     {
         private Task IndividualTask;
         private int parentsQuantity;
+        private int NumberOfIterations;
         private int n;
         private Random rand = new Random();
 
         public Genetic(Task individualTask)
         {
             IndividualTask = individualTask;
+            n = IndividualTask.X_start.Length;
+            parentsQuantity = 15 * n;
+        }
+
+        public Genetic(Task individualTask, int numberOfIterations)
+        {
+            IndividualTask = individualTask;
+            NumberOfIterations = numberOfIterations;
             n = IndividualTask.X_start.Length;
             parentsQuantity = 15 * n;
         }
@@ -32,6 +41,8 @@ namespace CourseWork.Methods
         
         private TaskPair get_children(IList<TaskPair> parents, long record, int lasting)
         {
+            if (parents.Count % 2 != 0)
+                parents.RemoveAt(parents.Count - 1);
             ICollection<TaskPair> iterationNodes = new SortedSet<TaskPair>();
             foreach(TaskPair parent in parents)
             {

@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         body {
-            /*background-image: url(https://i.pinimg.com/236x/5f/6b/90/5f6b901b907a2dc694bbe87effdbcdf3.jpg);*/
-            background-image: url(https://www.freeimageslive.co.uk/image/view/11913/_original);
+            /*background-image: url(https://www.freeimageslive.co.uk/image/view/11913/_original);*/
+            background-image: url(https://i.ibb.co/3y0VtpD/fon.jpg);
             background-attachment: fixed;
             background-size: cover;
         }
@@ -148,10 +148,11 @@
 </head>
 <body>
     <ul class="menu-main">
-        <li>@Html.ActionLink("Catalog", "GetAll", "Products")</li>
+        <li>@Html.ActionLink("Catalog", "GetAll", "Products")</li>        
         <li>@Html.ActionLink("Orders", "GetAll", "Orders")</li>
-        <li>@Html.ActionLink("Random", "Random", "Orders")</li>
+        <li>@Html.ActionLink("Random", "ChooseAmount", "Orders")</li>
         <li>@Html.ActionLink("File", "ChooseFile", "Orders")</li>
+        <li>@Html.ActionLink("Runtime Counter", "ChooseCounter", "Orders")</li>
     </ul>
         @RenderBody()
     <br>
