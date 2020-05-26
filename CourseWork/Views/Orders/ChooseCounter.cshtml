@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="form-check" style="padding-top: 60px;">
+    <div class="form-check" style="padding-top: 60px; padding-bottom: 20px;">
         <form method="get" action="~/Orders/ShowCounter" style="padding-top: 25px;">
             <p>
                 <label style="padding-left: 115px;">Amount of iterations</label><br />
@@ -20,6 +20,27 @@
             <p>
                 <label style="padding-left: 115px;">Amount of products</label><br />
                 <input class="form-control" type="number" name="Amount" value="Amount" required>
+
+            </p>
+
+            <p>
+                <label style="padding-left: 90px;">Left margin of write-off sum</label><br />
+                <input class="form-control" type="number" name="LeftSum" value="LeftSum" required>
+
+            </p>
+            <p>
+                <label style="padding-left: 85px;">Right margin of write-off sum</label><br />
+                <input class="form-control" type="number" name="RightSum" value="RightSum" required>
+
+            </p>
+            <p>
+                <label style="padding-left: 65px;">Left margin of amount of product</label><br />
+                <input class="form-control" type="number" name="LeftAmount" value="LeftAmount" required>
+
+            </p>
+            <p>
+                <label style="padding-left: 60px;">Right margin of amount of product</label><br />
+                <input class="form-control" type="number" name="RightAmount" value="RightAmount" required>
 
             </p>
             <p>

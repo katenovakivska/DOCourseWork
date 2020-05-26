@@ -178,11 +178,15 @@ namespace CourseWork.Controllers
         }
 
         [HttpGet]
-        public IActionResult Random(int Amount)
+        public IActionResult Random(int Amount, int leftSum, int rightSum, int leftAmount, int rightAmount)
         {
             FrankWolf frank = new FrankWolf();
             Random random = new Random();
-            Order order = RandomHandler.GetRandomizedOrder(Amount);
+            if (leftSum > rightSum || leftAmount > rightAmount || leftSum < 0 || rightAmount < 0 || rightAmount < 0 || leftAmount < 0)
+            {
+                return RedirectToAction(nameof(ChooseAmount));
+            }
+            Order order = RandomHandler.GetRandomizedOrder(Amount, leftSum, rightSum, leftAmount, rightAmount);
 
             ViewBag.Order = order;
 
@@ -373,10 +377,14 @@ namespace CourseWork.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult ShowCounter(int iterations, int amount)
+        public IActionResult ShowCounter(int iterations, int amount, int leftSum, int rightSum, int leftAmount, int rightAmount)
         {
             AlgorithmsRuntimeCounter counter = new AlgorithmsRuntimeCounter();
-            ViewBag.Counter = counter.CountTime(iterations, amount);
+            if (leftSum > rightSum || leftAmount > rightAmount || leftSum < 0 || rightAmount < 0 || rightAmount < 0 || leftAmount < 0)
+            {
+                return RedirectToAction(nameof(ChooseAmount));
+            }
+            ViewBag.Counter = counter.CountTime(iterations, amount, leftSum, rightSum, leftAmount, rightAmount);
 
             return View();
         }

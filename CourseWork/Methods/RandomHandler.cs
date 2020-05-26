@@ -10,14 +10,14 @@ namespace CourseWork.Methods
     {
         private static Random random = new Random();
 
-        public static Order GetRandomizedOrder(int productsQuantity)
+        public static Order GetRandomizedOrder(int productsQuantity, int leftSum, int rightSum, int leftAmount, int rightAmount)
         {
             Order order = GenerateOrder();
             order.OrdersProducts = new List<OrderProduct>();
             for (int i = 0; i < productsQuantity; i++)
             {
                 Product product = GenerateProduct();
-                OrderProduct orderProduct = GenerateOrderProducts(order, product);
+                OrderProduct orderProduct = GenerateOrderProducts(order, product, leftSum, rightSum, leftAmount, rightAmount);
                 order.AllWriteOffSum = order.AllWriteOffSum + orderProduct.WriteOffSum;
                 order.AllSum = order.AllSum + (orderProduct.Amount * orderProduct.Price);
                 order.Disbalance = Math.Abs(order.AllWriteOffSum - order.AllSum);
@@ -47,15 +47,15 @@ namespace CourseWork.Methods
 
             return product;
         }
-        private static OrderProduct GenerateOrderProducts(Order order, Product product)
+        private static OrderProduct GenerateOrderProducts(Order order, Product product, int leftSum, int rightSum, int leftAmount, int rightAmount)
         {
             OrderProduct orderProduct = new OrderProduct();
             orderProduct.Order = order;
             orderProduct.Product = product;
-            orderProduct.WriteOffSum = random.Next(30000, 50000);
-            orderProduct.Amount = random.Next(2, 8);
-            orderProduct.Price = (int)Math.Round((double)orderProduct.WriteOffSum / orderProduct.Amount);
-            orderProduct.Sum = (int)Math.Round((double)orderProduct.Amount * orderProduct.Price);
+            orderProduct.WriteOffSum = random.Next(leftSum, rightSum);
+            orderProduct.Amount = random.Next(leftAmount, rightAmount);
+            orderProduct.Price = Convert.ToInt32((double)orderProduct.WriteOffSum / orderProduct.Amount);
+            orderProduct.Sum = Convert.ToInt32((double)orderProduct.Amount * orderProduct.Price);
 
             return orderProduct;
         }

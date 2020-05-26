@@ -15,7 +15,7 @@ namespace CourseWork.Methods
         List<long> annealingTime = new List<long>();
         List<long> wolfTime = new List<long>();
 
-        public CounterResult CountTime(int i, int productsQuantity)
+        public CounterResult CountTime(int i, int productsQuantity, int leftSum, int rightSum, int leftAmount, int rightAmount)
         {
             List<TaskPair[]> Fxs = new List<TaskPair[]>();
             CounterResult result = new CounterResult();
@@ -26,7 +26,7 @@ namespace CourseWork.Methods
             //int productsQuantity = 3; //may be randomized or user-defined
             while (i != 0)
             {
-                Order generatedOrder = RandomHandler.GetRandomizedOrder(productsQuantity);
+                Order generatedOrder = RandomHandler.GetRandomizedOrder(productsQuantity, leftSum, rightSum, leftAmount, rightAmount);
                 Task task = ConvertOrderToTask(generatedOrder);
                 TaskPair pair1 = ExecuteGeneticAndSaveResults(task);
                 TaskPair pair2 = ExecuteAnnealingAndSaveResults(task);

@@ -24,7 +24,7 @@ namespace CourseWork.Methods
                 int[] fAlpha = new int[2];
                 int[] fAlphaMarch = new int[2];
                 int[] xNew = new int[count];
-                double eps = 0.5;
+                double alpha;
                 List<string> grad = new List<string>();
                 int i = 0, fx0 = 0;
                 int fxNew = 0;
@@ -87,7 +87,13 @@ namespace CourseWork.Methods
                 fAlpha[0] -= fx[count];
                 fAlphaMarch[0] = 2 * (int)Math.Pow(fAlpha[1], 2);
                 fAlphaMarch[1] = 2 * fAlpha[1] * fAlpha[0];
-                double alpha = Math.Round((double)-fAlphaMarch[1] / fAlphaMarch[0], 4);
+          
+                alpha = Math.Round((double)-fAlphaMarch[1] / fAlphaMarch[0], 4);
+            if (Double.IsInfinity(alpha))
+            {
+                alpha = 0;
+            }
+                
                 for (int j = 0; j < count; j++)
                 {
                    if (y[j] == 0)
