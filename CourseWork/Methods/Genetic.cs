@@ -41,6 +41,8 @@ namespace CourseWork.Methods
         
         private TaskPair get_children(IList<TaskPair> parents, long record, int lasting)
         {
+            if (parents.Count == 1)
+                return parents.ElementAt(0);
             if (parents.Count % 2 != 0)
                 parents.RemoveAt(parents.Count - 1);
             ICollection<TaskPair> iterationNodes = new SortedSet<TaskPair>();

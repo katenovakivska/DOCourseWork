@@ -52,8 +52,8 @@ namespace CourseWork.Methods
             OrderProduct orderProduct = new OrderProduct();
             orderProduct.Order = order;
             orderProduct.Product = product;
-            orderProduct.WriteOffSum = random.Next(leftSum, rightSum);
-            orderProduct.Amount = random.Next(leftAmount, rightAmount);
+            orderProduct.WriteOffSum = random.Next(leftSum, rightSum + 1);
+            orderProduct.Amount = random.Next(leftAmount, rightAmount + 1);
             orderProduct.Price = Convert.ToInt32((double)orderProduct.WriteOffSum / orderProduct.Amount);
             orderProduct.Sum = Convert.ToInt32((double)orderProduct.Amount * orderProduct.Price);
 
